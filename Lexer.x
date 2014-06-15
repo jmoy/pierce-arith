@@ -1,7 +1,7 @@
 {
 module Lexer (Token(..),P,evalP,lexer) where
 import AST
-import Control.Monad.State.Strict
+import Control.Monad.State
 import Control.Monad.Error
 import Data.Word
 }
