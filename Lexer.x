@@ -77,7 +77,6 @@ readToken = P $ \s ->
 
 -- The lexer function to be passed to Happy
 lexer::(Token -> P a)->P a
-lexer cont = do
-      t <- readToken
-      cont t
+lexer cont = readToken >>= cont
+
 }    
