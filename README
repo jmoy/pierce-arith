@@ -9,7 +9,7 @@ the user with a REPL at which arithmetic expressions can be
 typed. The sytem prints out a parse tree and the value
 of the expression.
 
-It was a little experiment for me to see how to implement
+It was an experiment for me to see how to implement
 a little language in Happy and Alex. In particular it uses
 monadic lexers and parsers in order to gracefully recover from 
 errors.
