@@ -15,9 +15,10 @@ a little language in Happy and Alex. In particular it uses
 monadic lexers and parsers in order to gracefully recover from 
 errors.
 
-Make sure you have Cabal installed and build with
+If you have Cabal installed you can build with
    cabal build
 and run with
    cabal run
+Otherwise see instructions for building [here](http://www.haskell.org/ghc/docs/7.0.2/html/Cabal/builders.html).
 
 Please send your comments to jyotirmoy@jyotirmoy.net
