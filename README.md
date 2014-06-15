@@ -1,10 +1,11 @@
 Implementation of simple arithmetic expressions from
 Chapter 3 of Pierce's 'Types and Programming Languages'
+in Haskell.
 
 The evaluator is a big-step evaluator in Pierce's 
 terminology.
 
-The package provides an executable arith, which presents
+The package provides an executable `arith`, which presents
 the user with a REPL at which arithmetic expressions can be
 typed. The sytem prints out a parse tree and the value
 of the expression.
@@ -13,5 +14,10 @@ It was an experiment for me to see how to implement
 a little language in Happy and Alex. In particular it uses
 monadic lexers and parsers in order to gracefully recover from 
 errors.
+
+Make sure you have Cabal installed and build with
+   cabal build
+and run with
+   cabal run
 
 Please send your comments to jyotirmoy@jyotirmoy.net
