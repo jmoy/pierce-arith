@@ -4,7 +4,6 @@ import AST
 import Control.Monad.State
 import Control.Monad.Error
 import Data.Word
-import Data.Maybe
 }
 
 tokens :-
