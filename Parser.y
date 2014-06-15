@@ -2,6 +2,7 @@
 module Parser(parse) where
 import AST
 import qualified Lexer as L
+import Control.Monad.Error
 }
 
 %monad{L.P}
@@ -32,6 +33,6 @@ Term	:  true				{STrue}
 	|  if Term then Term else Term	{SIfThen $2 $4 $6}
 
 {
-parseError _ = fail ""
+parseError _ = throwError "!Parse Error"
 
 }

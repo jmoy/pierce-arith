@@ -23,9 +23,9 @@ myREPL = do
       if s/="" 
       then 
         do 
-          case L.runP P.parse (encode s) of
-            Just (t,_) -> putStrLn (output t)
-            Nothing -> putStrLn "!Parse Error"
+          case L.evalP P.parse (encode s) of
+            Right t -> putStrLn (output t)
+            Left s -> putStrLn s
           myREPL
       else
         myREPL

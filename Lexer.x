@@ -1,8 +1,10 @@
 {
-module Lexer (Token(..),P,runP,lexer) where
+module Lexer (Token(..),P,evalP,lexer) where
 import AST
-import Control.Monad
+import Control.Monad.State
+import Control.Monad.Error
 import Data.Word
+import Data.Maybe
 }
 
 tokens :-
@@ -40,40 +42,26 @@ alexGetByte []    = Nothing
 alexInputPrevChar :: AlexInput -> Char
 alexInputPrevChar = undefined
 
--- The underlying result type of our parser
-type ParseResult a = Maybe (a,AlexInput)
 
 -- Our Parser monad
-newtype P a = P {unP::AlexInput -> ParseResult a}
+type P a = StateT AlexInput (Either String) a
 
-runP::P a -> AlexInput -> ParseResult a
-runP (P m) s = m s
-
-instance Monad P where
-	 return = returnP
-	 (>>=) = thenP
-	 fail = failP
-
-returnP::a -> P a
-returnP a = P $ \s -> Just (a,s)
-
-thenP::P a -> (a -> P b) -> P b
-(P m) `thenP` k  = P $ \s ->
-      case m s of
-      	   Just (v,s1) -> (unP (k v)) s1
-	   Nothing -> Nothing
-
-failP::String -> P a
-failP _ = P $ \s -> Nothing
+evalP::P a -> AlexInput -> Either String a
+evalP = evalStateT
 
 -- Action to read a token
 readToken::P Token
-readToken = P $ \s ->
-      case alexScan s 0 of
-      	   AlexEOF -> Just (TEOF,s)
-	   AlexError _ -> Nothing
-	   AlexSkip inp' _ -> (unP readToken) inp'
-	   AlexToken inp' _ tk -> Just (tk,inp')
+readToken = do
+	  s <- get  
+	  case alexScan s 0 of
+      	        AlexEOF -> return TEOF
+		AlexError _ -> throwError "!Lexical error"
+	   	AlexSkip inp' _ -> do	
+			  put inp'
+			  readToken
+	   	AlexToken inp' _ tk -> do 
+			  put inp'
+			  return tk
 
 -- The lexer function to be passed to Happy
 lexer::(Token -> P a)->P a
