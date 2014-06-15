@@ -16,8 +16,11 @@ monadic lexers and parsers in order to gracefully recover from
 errors.
 
 If you have Cabal installed you can build with
+
     cabal build
+
 and run with
+
     cabal run
 Otherwise see instructions for building [here](http://www.haskell.org/ghc/docs/7.0.2/html/Cabal/builders.html).
 
