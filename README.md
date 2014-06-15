@@ -15,6 +15,9 @@ a little language in Happy and Alex. In particular it uses
 monadic lexers and parsers in order to gracefully recover from 
 errors.
 
+We also demonstrate the StateT monad transformer and Error
+monad from the mtl library.
+
 If you have Cabal installed you can build with
 
     cabal build
